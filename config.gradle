@@ -1,0 +1,52 @@
+/*全局配置信息及第三方依赖统一管理*/
+project.ext {
+    //统一设置APP配置
+    setDefaultConfig = { extension ->
+        //相对于APP中的build.gradle android {}的内容
+        extension.android {
+            compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+            buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+            defaultConfig {
+                minSdkVersion rootProject.ext.android["minSdkVersion"]
+                targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+                versionCode rootProject.ext.android["versionCode"]
+                versionName rootProject.ext.android["versionName"]
+
+                testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunne"
+                multiDexEnabled true
+                //ARouter路由配置
+//                javaCompileOptions {
+//                    annotationProcessorOptions {
+//                        includeCompileClasspath = true
+//                        arguments = [AROUTER_MODULE_NAME  : project.getName()]
+//                    }
+//                }
+            }
+
+            buildTypes {
+                release {
+                    minifyEnabled true
+                    proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                }
+            }
+
+            sourceSets {
+                main {
+                    jniLibs.srcDirs = ['lib']
+                }
+            }
+            buildFeatures {
+                dataBinding = true
+            }
+            compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_1_8.toString()
+            }
+        }
+
+    }
+
+}

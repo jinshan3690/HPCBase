@@ -1,0 +1,3 @@
+include ':app', ':common', ':widget'
+
+rootProject.name = "HPCBase"
