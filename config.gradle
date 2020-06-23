@@ -13,7 +13,7 @@ project.ext {
                 versionName rootProject.ext.android["versionName"]
 
                 testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunne"
-                multiDexEnabled true
+//                multiDexEnabled true
                 //ARouter路由配置
 //                javaCompileOptions {
 //                    annotationProcessorOptions {
