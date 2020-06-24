@@ -94,7 +94,7 @@ class L private constructor() {
             lineNumber = sElements[1].lineNumber
         }
 
-        // 下面四个是默认tag的函数
+        @JvmStatic
         fun i(msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -117,6 +117,7 @@ class L private constructor() {
             }
         }
 
+        @JvmStatic
         fun d(msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -139,6 +140,7 @@ class L private constructor() {
             }
         }
 
+        @JvmStatic
         fun e(msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -161,6 +163,7 @@ class L private constructor() {
             }
         }
 
+        @JvmStatic
         fun v(msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -183,7 +186,7 @@ class L private constructor() {
             }
         }
 
-        // 下面是传入自定义tag的函数
+        @JvmStatic
         fun i(tag: String, msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -206,6 +209,7 @@ class L private constructor() {
             }
         }
 
+        @JvmStatic
         fun d(tag: String, msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -228,6 +232,7 @@ class L private constructor() {
             }
         }
 
+        @JvmStatic
         fun e(tag: String, msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
@@ -250,6 +255,7 @@ class L private constructor() {
             }
         }
 
+        @JvmStatic
         fun v(tag: String, msg: String) {
             if (!isDebug) return
             // Throwable instance must be created before any methods
