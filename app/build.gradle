@@ -29,7 +29,7 @@ android {
     buildTypes {
         release {
             //启用资源压缩
-            shrinkResources true
+            shrinkResources false
         }
     }
 
@@ -62,9 +62,11 @@ dependencies {
     api rootProject.ext.dependencies["hilt-work"]
     kapt rootProject.ext.dependencies["hilt-android-compiler"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
-    //repository
-//    kapt rootProject.ext.dependencies["room-compiler"]
+
+    kapt rootProject.ext.dependencies["room-compiler"]
     kapt rootProject.ext.dependencies["arouter-compiler"]
+    kapt rootProject.ext.dependencies["glide-compiler"]
+    kapt rootProject.ext.dependencies["permissionsdispatcher-compiler"]
 
 
 
