@@ -4,6 +4,7 @@ import android.view.Gravity
 import android.widget.Toast
 import com.hpcang.base.common.BaseApplication
 
+var text :Int = 0
 
 /**
  * 短时间显示Toast

@@ -48,7 +48,7 @@ dependencies {
     api rootProject.ext.dependencies["retrofit-url-manager"]
     api rootProject.ext.dependencies["permissionsdispatcher"]
     implementation rootProject.ext.dependencies["systembartint"]
-    implementation rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["multidex"]
     debugImplementation rootProject.ext.dependencies["debug-leakcanary"]
 
 }
