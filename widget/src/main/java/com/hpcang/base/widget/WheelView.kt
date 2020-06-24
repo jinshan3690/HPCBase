@@ -82,14 +82,15 @@ class WheelView @JvmOverloads constructor(
         initData()
     }
 
-    var offset = OFF_SET_DEFAULT // 偏移量（需要在最前面和最后面补全）
+    var offset = 1 // 偏移量（需要在最前面和最后面补全）
+
     //setItem之前
     fun set(offset: Int) {
         selectedIndex = selectedIndex + offset - this.offset
         this.offset = offset
     }
 
-    private var displayItemCount:Int= 0 // 每页显示的数量 = 0
+    private var displayItemCount: Int = 0 // 每页显示的数量 = 0
     var selectedIndex = offset
     private fun init() {
 
@@ -355,9 +356,6 @@ class WheelView @JvmOverloads constructor(
         fun onSelected(selectedIndex: Int, item: String?) {}
     }
 
-    companion object {
-        const val OFF_SET_DEFAULT = 1
-        private const val SCROLL_DIRECTION_UP = 0
-        private const val SCROLL_DIRECTION_DOWN = 1
-    }
+    private val SCROLL_DIRECTION_UP = 0
+    private val SCROLL_DIRECTION_DOWN = 1
 }

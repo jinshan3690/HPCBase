@@ -23,24 +23,6 @@ class SoftKeyBoardListener private constructor(//activity的根视图
         this.onSoftKeyBoardChangeListener = onSoftKeyBoardChangeListener
     }
 
-    interface OnSoftKeyBoardChangeListener {
-        fun keyBoardShow(height: Int)
-        fun keyBoardHide(height: Int)
-    }
-
-    companion object {
-        fun getInstance(activity: Activity): SoftKeyBoardListener {
-            return SoftKeyBoardListener(
-                activity.window.decorView
-                    .findViewById(R.id.content)
-            )
-        }
-
-        fun getInstance(view: View): SoftKeyBoardListener {
-            return SoftKeyBoardListener(view)
-        }
-    }
-
     init {
         //获取activity的根视图
         //监听视图树中全局布局发生改变或者视图树中的某个视图的可视状态发生改变
@@ -87,4 +69,26 @@ class SoftKeyBoardListener private constructor(//activity的根视图
             }
         }
     }
+
+    interface OnSoftKeyBoardChangeListener {
+        fun keyBoardShow(height: Int)
+        fun keyBoardHide(height: Int)
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun getInstance(activity: Activity): SoftKeyBoardListener {
+            return SoftKeyBoardListener(
+                activity.window.decorView
+                    .findViewById(R.id.content)
+            )
+        }
+
+        @JvmStatic
+        fun getInstance(view: View): SoftKeyBoardListener {
+            return SoftKeyBoardListener(view)
+        }
+    }
+
 }

@@ -245,6 +245,7 @@ class AcManager(private val context: Activity) {
 
     companion object {
 
+        @JvmStatic
         fun getInstance(context: Activity): AcManager {
             return AcManager(context)
         }
@@ -252,10 +253,12 @@ class AcManager(private val context: Activity) {
         /**
          * 跳转方法
          */
+        @JvmStatic
         fun toActivity(context: Context, url: String) {
             ARouter.getInstance().build(url).navigation(context)
         }
 
+        @JvmStatic
         fun toActivity(
             context: Context, url: String, compat: ActivityOptionsCompat
         ) {
@@ -264,12 +267,14 @@ class AcManager(private val context: Activity) {
                 .withOptionsCompat(compat).navigation(context)
         }
 
+        @JvmStatic
         fun toActivityForResult(
             context: Activity, url: String, request: Int
         ) {
             ARouter.getInstance().build(url).navigation(context, request)
         }
 
+        @JvmStatic
         fun toActivityForResult(
             context: Activity, url: String, compat: ActivityOptionsCompat, request: Int
         ) {
@@ -278,16 +283,19 @@ class AcManager(private val context: Activity) {
                 .withOptionsCompat(compat).navigation(context, request)
         }
 
+        @JvmStatic
         fun toActivityForData(url: String): Postcard {
             return ARouter.getInstance().build(url)
         }
 
+        @JvmStatic
         fun toActivityForData(url: String, compat: ActivityOptionsCompat): Postcard {
             return ARouter.getInstance()
                 .build(url)
                 .withOptionsCompat(compat)
         }
 
+        @JvmStatic
         fun getCompat(
             context: Activity, v: View, target: String
         ): ActivityOptionsCompat {

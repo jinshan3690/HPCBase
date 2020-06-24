@@ -33,16 +33,6 @@ abstract class BaseApplication : MultiDexApplication(), Configuration.Provider {
      */
     private fun workThread(packageName: String) {}
 
-    companion object {
-
-        var innerContext:Application? = null
-
-        fun getContext():Application{
-            return innerContext!!
-        }
-
-    }
-
     private fun initAutoSize() {
         AutoSizeConfig.getInstance().setLog(SystemUtil.isDebug(getContext()))
         AutoSizeConfig.getInstance().isCustomFragment = true
@@ -57,6 +47,18 @@ abstract class BaseApplication : MultiDexApplication(), Configuration.Provider {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)
+    }
+
+    companion object {
+
+        @JvmStatic
+        var innerContext:Application? = null
+
+        @JvmStatic
+        fun getContext():Application{
+            return innerContext!!
+        }
+
     }
 
 }

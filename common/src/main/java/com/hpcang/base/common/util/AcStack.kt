@@ -164,8 +164,9 @@ class AcStack private constructor() {
     }
 
     companion object {
-        private var activityStack: Stack<Activity?>? = null
+        private var activityStack: Stack<Activity>? = null
         private val instance = AcStack()
+        @JvmStatic
         fun create(): AcStack {
             return instance
         }
