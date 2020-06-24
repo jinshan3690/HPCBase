@@ -40,4 +40,15 @@ dependencies {
     api rootProject.ext.dependencies["logging-interceptor"]
     api rootProject.ext.dependencies["arouter"]
 
+    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide-okhttp3-integration"]
+    api rootProject.ext.dependencies["glide-annotations"]
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["retrofit-url-manager"]
+    api rootProject.ext.dependencies["permissionsdispatcher"]
+    implementation rootProject.ext.dependencies["systembartint"]
+    implementation rootProject.ext.dependencies["multidex"]
+    debugImplementation rootProject.ext.dependencies["debug-leakcanary"]
+
 }

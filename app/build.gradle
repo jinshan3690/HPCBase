@@ -18,6 +18,12 @@ android {
 
     defaultConfig {
         applicationId rootProject.ext.android["applicationId"]
+        //ARouter路由配置
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -56,9 +62,9 @@ dependencies {
     api rootProject.ext.dependencies["hilt-work"]
     kapt rootProject.ext.dependencies["hilt-android-compiler"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
-
-    kapt rootProject.ext.dependencies["room-compiler"]
-//    kapt rootProject.ext.dependencies["arouter-compiler"]
+    //repository
+//    kapt rootProject.ext.dependencies["room-compiler"]
+    kapt rootProject.ext.dependencies["arouter-compiler"]
 
 
 

@@ -1,0 +1,61 @@
+<resources>
+
+    <declare-styleable name="WheelView">
+        <attr name="wheel_border_color" format="reference|color" />
+        <attr name="wheel_text_color" format="reference|color" />
+        <attr name="wheel_text_hint_color" format="reference|color" />
+        <attr name="wheel_text_size" format="dimension|reference" />
+        <attr name="wheel_text_padding" format="dimension|reference" />
+        <attr name="wheel_min_divider_width" format="dimension|reference" />
+        <attr name="wheel_max_width" format="dimension|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SmartLayout">
+        <attr name="sl_color" format="reference|color" />
+        <attr name="sl_endColor" format="reference|color" />
+        <attr name="sl_orientation" format="enum">
+            <enum name="TOP_BOTTOM" value="0" />
+            <enum name="TR_BL" value="1" />
+            <enum name="RIGHT_LEFT" value="2" />
+            <enum name="BR_TL" value="3" />
+            <enum name="BOTTOM_TOP" value="4" />
+            <enum name="BL_TR" value="5" />
+            <enum name="LEFT_RIGHT" value="6" />
+            <enum name="TL_BR" value="7" />
+        </attr>
+        <attr name="sl_rippleColor" format="reference|color" />
+        <attr name="sl_shadowColor" format="reference|color" />
+        <attr name="sl_disableColor" format="reference|color" />
+        <attr name="sl_maskDrawable" format="reference" />
+        <attr name="sl_stateListAnim" format="reference" />
+        <attr name="sl_defaultStateListAnim" format="reference|boolean" />
+        <attr name="sl_stroke" format="reference|dimension" />
+        <attr name="sl_strokeColor" format="reference|color" />
+        <attr name="sl_selectedStrokeColor" format="reference|color" />
+        <attr name="sl_selectedColor" format="reference|color" />
+        <attr name="sl_selectedEndColor" format="reference|color" />
+        <attr name="sl_radius" format="reference|dimension" />
+        <attr name="sl_radiusLeftTop" format="reference|dimension" />
+        <attr name="sl_radiusRightTop" format="reference|dimension" />
+        <attr name="sl_radiusLeftBottom" format="reference|dimension" />
+        <attr name="sl_radiusRightBottom" format="reference|dimension" />
+        <attr name="sl_elevationNormal" format="reference|dimension" />
+        <attr name="sl_translationZNormal" format="reference|dimension" />
+        <attr name="sl_elevationPressed" format="reference|dimension" />
+        <attr name="sl_translationZPressed" format="reference|dimension" />
+        <attr name="sl_enabled" format="reference|boolean" />
+        <attr name="sl_shape" format="enum">
+            <enum name="RECTANGLE" value="0" />
+            <enum name="OVAL" value="1" />
+            <enum name="LINE" value="2" />
+            <enum name="RING" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NoScrollViewPager">
+        <attr name="no_autoHeight" format="boolean|reference" />
+        <attr name="no_scroll" format="boolean|reference" />
+        <attr name="no_smoothScroll" format="boolean|reference" />
+    </declare-styleable>
+
+</resources>
