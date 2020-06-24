@@ -55,7 +55,7 @@ abstract class BaseActivity : ComponentActivity() {
         super.setContentView(view)
 
         this.view = view
-        acManager.changeStatusBar(view)
+        acManager.changeStatusBar(view!!)
 
         initView()
         queryData()
@@ -97,35 +97,35 @@ abstract class BaseActivity : ComponentActivity() {
     /**
      * 跳转方法
      */
-    fun toActivity(url: String?) {
+    fun toActivity(url: String) {
         AcManager.toActivity(context, url)
     }
 
-    fun toActivity(url: String?, compat: ActivityOptionsCompat?) {
+    fun toActivity(url: String, compat: ActivityOptionsCompat) {
         AcManager.toActivity(context, url, compat)
     }
 
-    fun toActivityForResult(url: String?, request: Int) {
+    fun toActivityForResult(url: String, request: Int) {
         AcManager.toActivityForResult(context, url, request)
     }
 
     fun toActivityForResult(
-        url: String?, compat: ActivityOptionsCompat?, request: Int
+        url: String, compat: ActivityOptionsCompat, request: Int
     ) {
         AcManager.toActivityForResult(context, url, compat, request)
     }
 
-    fun toActivityForData(url: String?): Postcard {
+    fun toActivityForData(url: String): Postcard {
         return AcManager.toActivityForData(url)
     }
 
-    fun toActivityForData(url: String?, compat: ActivityOptionsCompat?): Postcard {
+    fun toActivityForData(url: String, compat: ActivityOptionsCompat): Postcard {
         return AcManager.toActivityForData(url, compat)
     }
 
-    fun getCompat(v: View?, target: String?): Bundle? {
+    fun getCompat(v: View, target: String): Bundle? {
         val options =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(context, v!!, target!!)
+            ActivityOptionsCompat.makeSceneTransitionAnimation(context, v, target)
         return options.toBundle()
     }
 

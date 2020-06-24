@@ -7,54 +7,34 @@ import com.hpcang.base.common.BaseApplication
  * dp转px
  */
 fun Float.dp2px(): Int {
-    return this
-        .takeIf { BaseApplication.context != null }
-        ?.run {
-            TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                this, BaseApplication.context!!.resources.displayMetrics
-            ).toInt()
-        }
-        .run { 0 }
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this, BaseApplication.getContext().resources.displayMetrics
+    ).toInt()
 }
 
 /**
  * sp转px
  */
 fun Float.sp2px(): Int {
-  return this
-    .takeIf { BaseApplication.context != null }
-    ?.run {
-      TypedValue.applyDimension(
+    return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
-        this, BaseApplication.context!!.resources.displayMetrics
-      ).toInt()
-    }
-    .run { 0 }
+        this, BaseApplication.getContext().resources.displayMetrics
+    ).toInt()
 }
 
 /**
  * px转dp
  */
 fun Float.px2dp(): Float {
-  return this
-    .takeIf { BaseApplication.context != null }
-    ?.run {
-      val scale = BaseApplication.context!!.resources.displayMetrics.density
-      return this / scale
-    }
-    .run { 0f }
+    val scale = BaseApplication.getContext().resources.displayMetrics.density
+    return this / scale
 }
 
 /**
  * px转sp
  */
 fun Float.px2sp(): Float {
-    return this
-    .takeIf { BaseApplication.context != null }
-    ?.run {
-      val scale = BaseApplication.context!!.resources.displayMetrics.scaledDensity
-      return this / scale
-    }
-    .run { 0f }
+    val scale = BaseApplication.getContext().resources.displayMetrics.scaledDensity
+    return this / scale
 }

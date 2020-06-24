@@ -10,7 +10,7 @@ import com.hpcang.base.common.BaseApplication
  */
 @JvmOverloads
 fun showToast(gravity: Int = Gravity.CENTER, duration: Int = Toast.LENGTH_SHORT, message: () -> String) {
-    val toast = Toast.makeText(BaseApplication.context, message(), duration)
+    val toast = Toast.makeText(BaseApplication.getContext(), message(), duration)
     toast.setGravity(gravity, 0, 0)
     toast.show()
 }
@@ -21,7 +21,7 @@ fun showToast(gravity: Int = Gravity.CENTER, duration: Int = Toast.LENGTH_SHORT,
 inline fun showToastLong(
     gravity: Int = Gravity.CENTER, duration: Int = Toast.LENGTH_LONG, message: () -> String
 ) {
-    val toast = Toast.makeText(BaseApplication.context, message(), duration)
+    val toast = Toast.makeText(BaseApplication.getContext(), message(), duration)
     toast.setGravity(gravity, 0, 0)
     toast.show()
 }

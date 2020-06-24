@@ -13,11 +13,11 @@ abstract class BaseApplication : MultiDexApplication(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        context = this
-        if (SystemUtil.isMainProcess(context)) {
+        innerContext = this
+        if (SystemUtil.isMainProcess(getContext())) {
             mainThread()
         } else {
-            workThread(SystemUtil.currentProcessName(context))
+            workThread(SystemUtil.currentProcessName(getContext()))
         }
     }
 
@@ -35,13 +35,16 @@ abstract class BaseApplication : MultiDexApplication(), Configuration.Provider {
 
     companion object {
 
-        @JvmField
-        var context:Application? = null
+        var innerContext:Application? = null
+
+        fun getContext():Application{
+            return innerContext!!
+        }
 
     }
 
     private fun initAutoSize() {
-        AutoSizeConfig.getInstance().setLog(SystemUtil.isDebug(context))
+        AutoSizeConfig.getInstance().setLog(SystemUtil.isDebug(getContext()))
         AutoSizeConfig.getInstance().isCustomFragment = true
         AutoSizeConfig.getInstance().isExcludeFontScale = true
     }
