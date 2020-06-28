@@ -25,9 +25,6 @@ abstract class BaseActivity : ComponentActivity() {
     var view: View? = null
     val acManager: AcManager by lazy { AcManager.getInstance(context) }
 
-    var loadingView: ViewGroup? = null
-    var loadingProgressView: CircularProgressDrawable? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
         initViewBefore(savedInstanceState)
@@ -43,6 +40,7 @@ abstract class BaseActivity : ComponentActivity() {
     protected inline fun <reified T : ViewDataBinding> binding(
         @LayoutRes resId: Int
     ): Lazy<T> = lazy {
+        initLoading()
         DataBindingUtil.setContentView<T>(this, resId)
     }
 
@@ -59,6 +57,8 @@ abstract class BaseActivity : ComponentActivity() {
         initView()
         queryData()
     }
+
+    abstract fun initLoading()
 
     abstract fun showLoading()
 

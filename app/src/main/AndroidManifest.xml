@@ -29,14 +29,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-<!--        <provider-->
-<!--            android:name="androidx.work.impl.WorkManagerInitializer"-->
-<!--            android:authorities="${applicationId}.workmanager-init"-->
-<!--            android:directBootAware="false"-->
-<!--            android:exported="false"-->
-<!--            android:multiprocess="true"-->
-<!--            tools:node="remove"-->
-<!--            tools:targetApi="n" />-->
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:directBootAware="false"
+            android:exported="false"
+            android:multiprocess="true"
+            tools:node="remove"
+            tools:targetApi="n" />
 
     </application>
 
