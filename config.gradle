@@ -18,7 +18,11 @@ project.ext {
 
             buildTypes {
                 release {
-                    minifyEnabled false
+                    minifyEnabled true
+                    if (extension.android.defaultConfig.applicationId != null) {
+                        //启用资源压缩
+                        shrinkResources true
+                    }
                     proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
                 }
             }
@@ -26,6 +30,15 @@ project.ext {
             sourceSets {
                 main {
                     jniLibs.srcDirs = ['lib']
+                    if (rootProject.ext.isModule && file('src/main/module/AndroidManifest.xml').exists()) {
+                        manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                    } else {
+                        manifest.srcFile 'src/main/AndroidManifest.xml'
+                        java {
+                            //排除java/debug文件夹下的所有文件
+                            exclude '*module'
+                        }
+                    }
                 }
             }
             buildFeatures {

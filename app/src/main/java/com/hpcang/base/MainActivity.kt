@@ -3,18 +3,19 @@ package com.hpcang.base
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.databinding.ViewDataBinding
 import com.hpcang.base.common.BaseActivity
 import com.hpcang.base.common.extensions.showToast
 import com.hpcang.base.common.extensions.text
+import com.hpcang.base.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        }
+
+    private val binding: ActivityMainBinding by binding(R.layout.activity_main)
+
 
     override fun initLoading() {
 
@@ -26,6 +27,12 @@ class MainActivity : BaseActivity() {
 
     override fun hideLoading() {
 
+    }
+
+    override fun initBinding() {
+        binding.apply {
+            lifecycleOwner = this@MainActivity
+        }
     }
 
     override fun initView() {

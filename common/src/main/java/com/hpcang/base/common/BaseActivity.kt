@@ -29,6 +29,10 @@ abstract class BaseActivity : ComponentActivity() {
         initViewBefore(savedInstanceState)
         super.onCreate(savedInstanceState)
         AcStack.create().addActivity(this)
+        initBinding()
+        initLoading()
+        initView()
+        queryData()
     }
 
     open fun initViewBefore(savedInstanceState: Bundle?) {
@@ -42,15 +46,15 @@ abstract class BaseActivity : ComponentActivity() {
         DataBindingUtil.setContentView<T>(this, resId)
     }
 
-    override fun setContentView(@IdRes  layoutResID: Int) {
-        super.setContentView(layoutResID)
+    override fun setContentView(@IdRes layoutResID: Int) {
+        setContentView(layoutInflater.inflate(layoutResID, null, false))
+    }
 
-        view = window.findViewById(android.R.id.content)
+    override fun setContentView(view: View?) {
+        super.setContentView(view)
+
+        this.view = view
         acManager.changeStatusBar(view!!)
-
-        initLoading()
-        initView()
-        queryData()
     }
 
     abstract fun initLoading()
@@ -58,6 +62,8 @@ abstract class BaseActivity : ComponentActivity() {
     abstract fun showLoading()
 
     abstract fun hideLoading()
+
+    abstract fun initBinding()
 
     abstract fun initView()
 
