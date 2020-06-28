@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.ComponentActivity
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.alibaba.android.arouter.facade.Postcard
 import com.hpcang.base.common.util.AcManager
 import com.hpcang.base.common.util.AcStack
@@ -43,17 +42,13 @@ abstract class BaseActivity : ComponentActivity() {
         DataBindingUtil.setContentView<T>(this, resId)
     }
 
-    override fun setContentView(layoutResID: Int) {
-        setContentView(layoutInflater.inflate(layoutResID, null))
-    }
+    override fun setContentView(@IdRes  layoutResID: Int) {
+        super.setContentView(layoutResID)
 
-    override fun setContentView(view: View?) {
-        super.setContentView(view)
-
-        initLoading()
-        this.view = view
+        view = window.findViewById(layoutResID)
         acManager.changeStatusBar(view!!)
 
+        initLoading()
         initView()
         queryData()
     }
