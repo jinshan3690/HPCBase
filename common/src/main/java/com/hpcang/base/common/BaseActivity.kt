@@ -40,7 +40,6 @@ abstract class BaseActivity : ComponentActivity() {
     protected inline fun <reified T : ViewDataBinding> binding(
         @LayoutRes resId: Int
     ): Lazy<T> = lazy {
-        initLoading()
         DataBindingUtil.setContentView<T>(this, resId)
     }
 
@@ -51,6 +50,7 @@ abstract class BaseActivity : ComponentActivity() {
     override fun setContentView(view: View?) {
         super.setContentView(view)
 
+        initLoading()
         this.view = view
         acManager.changeStatusBar(view!!)
 
