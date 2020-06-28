@@ -68,6 +68,8 @@ dependencies {
     kapt rootProject.ext.dependencies["glide-compiler"]
     kapt rootProject.ext.dependencies["permissionsdispatcher-compiler"]
 
-
+    if (!rootProject.ext.isModule) {
+//        implementation project(':login')
+    }
 
 }

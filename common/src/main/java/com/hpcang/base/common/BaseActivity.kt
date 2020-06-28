@@ -7,14 +7,13 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.ComponentActivity
 import androidx.annotation.LayoutRes
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.app.ComponentActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.alibaba.android.arouter.facade.Postcard
-import com.hpcang.base.common.extensions.dp2px
 import com.hpcang.base.common.util.AcManager
 import com.hpcang.base.common.util.AcStack
 import me.jessyan.autosize.AutoSizeCompat
