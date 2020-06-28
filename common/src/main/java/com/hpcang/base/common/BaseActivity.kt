@@ -32,7 +32,7 @@ abstract class BaseActivity : ComponentActivity() {
         AcStack.create().addActivity(this)
     }
 
-    fun initViewBefore(savedInstanceState: Bundle?) {
+    open fun initViewBefore(savedInstanceState: Bundle?) {
         acManager.isStatusTrans = true
         acManager.setStatusDark()
     }
