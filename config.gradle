@@ -17,8 +17,8 @@ project.ext {
             }
 
             buildTypes {
-                release {
-                    minifyEnabled true
+                release {//远程仓库不能混淆
+                    minifyEnabled false
                     if (extension.android.defaultConfig.applicationId != null) {
                         //启用资源压缩
                         shrinkResources true
