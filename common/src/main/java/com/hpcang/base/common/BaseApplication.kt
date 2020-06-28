@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import androidx.work.Configuration
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hpcang.base.common.util.SystemUtil
 import me.jessyan.autosize.AutoSizeConfig
 
@@ -14,6 +15,13 @@ abstract class BaseApplication : MultiDexApplication(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         innerContext = this
+
+        if (SystemUtil.isDebug(this)) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
+
         if (SystemUtil.isMainProcess(getContext())) {
             mainThread()
         } else {
