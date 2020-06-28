@@ -45,7 +45,7 @@ abstract class BaseActivity : ComponentActivity() {
     override fun setContentView(@IdRes  layoutResID: Int) {
         super.setContentView(layoutResID)
 
-        view = window.findViewById(layoutResID)
+        view = window.findViewById(android.R.id.content)
         acManager.changeStatusBar(view!!)
 
         initLoading()
