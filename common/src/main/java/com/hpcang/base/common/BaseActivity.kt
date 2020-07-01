@@ -26,8 +26,9 @@ abstract class BaseActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
-        initViewBefore(savedInstanceState)
+        onCreateBefore(savedInstanceState)
         super.onCreate(savedInstanceState)
+        initViewBefore()
         AcStack.create().addActivity(this)
         initBinding()
         initLoading()
@@ -35,10 +36,12 @@ abstract class BaseActivity : ComponentActivity() {
         queryData()
     }
 
-    open fun initViewBefore(savedInstanceState: Bundle?) {
+    open fun onCreateBefore(savedInstanceState: Bundle?) {
         acManager.isStatusTrans = true
         acManager.setStatusDark()
     }
+
+    open fun initViewBefore() {}
 
     protected inline fun <reified T : ViewDataBinding> binding(
         @LayoutRes resId: Int

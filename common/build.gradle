@@ -49,6 +49,5 @@ dependencies {
     api rootProject.ext.dependencies["permissionsdispatcher"]
     implementation rootProject.ext.dependencies["systembartint"]
     api rootProject.ext.dependencies["multidex"]
-    debugImplementation rootProject.ext.dependencies["debug-leakcanary"]
 
 }
