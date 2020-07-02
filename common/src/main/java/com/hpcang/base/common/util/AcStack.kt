@@ -20,11 +20,12 @@ import android.content.Context
 import java.util.*
 
 class AcStack private constructor() {
+
     /**
      * 获取当前Activity栈中元素个数
      */
     val count: Int
-        get() = activityStack!!.size
+        get() = activityStack?.size?:0
 
     /**
      * 添加Activity到栈
@@ -33,7 +34,7 @@ class AcStack private constructor() {
         if (activityStack == null) {
             activityStack = Stack()
         }
-        activityStack!!.add(activity)
+        activityStack?.add(activity)
     }
 
     /**
@@ -48,8 +49,7 @@ class AcStack private constructor() {
         if (activityStack!!.isEmpty()) {
             return null
         }
-        val activity = activityStack!!.lastElement()
-        return activity
+        return activityStack?.lastElement()
     }
 
     /**
@@ -57,8 +57,11 @@ class AcStack private constructor() {
      */
     fun findActivity(cls: Class<*>): Activity? {
         var activity: Activity? = null
+        if(activityStack == null)
+            return activity
+
         for (aty in activityStack!!) {
-            if (aty!!.javaClass == cls) {
+            if (aty?.javaClass == cls) {
                 activity = aty
                 break
             }
@@ -70,7 +73,7 @@ class AcStack private constructor() {
      * 结束当前Activity（栈顶Activity）
      */
     fun finishActivity() {
-        val activity = activityStack!!.lastElement()
+        val activity = activityStack?.lastElement()
         finishActivity(activity)
     }
 
@@ -79,14 +82,14 @@ class AcStack private constructor() {
      */
     fun finishActivity(activity: Activity?) {
         if (activity != null) {
-            activityStack!!.remove(activity)
+            activityStack?.remove(activity)
             activity.finish() //此处不用finish
         }
     }
 
     fun removeActivity(activity: Activity?) {
         if (activity != null) {
-            activityStack!!.remove(activity)
+            activityStack?.remove(activity)
         }
     }
 
@@ -95,10 +98,10 @@ class AcStack private constructor() {
      */
     fun finishActivity(cls: Class<*>) {
         var i = 0
-        val size = activityStack!!.size
+        val size = activityStack?.size?:0
         while (i < size) {
-            if (activityStack!![i]!!.javaClass == cls) {
-                activityStack!![i]!!.finish()
+            if (activityStack!![i].javaClass == cls) {
+                activityStack!![i].finish()
             }
             i++
         }
@@ -111,10 +114,10 @@ class AcStack private constructor() {
      */
     fun finishOthersActivity(cls: Class<*>) {
         var i = 0
-        val size = activityStack!!.size
+        val size = activityStack?.size?:0
         while (i < size) {
-            if (activityStack!![i]!!.javaClass != cls) {
-                activityStack!![i]!!.finish()
+            if (activityStack!![i].javaClass != cls) {
+                activityStack!![i].finish()
             }
             i++
         }
@@ -122,10 +125,10 @@ class AcStack private constructor() {
 
     fun finishOthersActivity(className: String) {
         var i = 0
-        val size = activityStack!!.size
+        val size = activityStack?.size?:0
         while (i < size) {
-            if (activityStack!![i]!!.javaClass.simpleName != className) {
-                activityStack!![i]!!.finish()
+            if (activityStack!![i].javaClass.simpleName != className) {
+                activityStack!![i].finish()
             }
             i++
         }
@@ -136,19 +139,14 @@ class AcStack private constructor() {
      */
     fun finishAllActivity() {
         var i = 0
-        val size = activityStack!!.size
+        val size = activityStack?.size?:0
         while (i < size) {
             if (null != activityStack!![i]) {
-                activityStack!![i]!!.finish()
+                activityStack!![i].finish()
             }
             i++
         }
-        activityStack!!.clear()
-    }
-
-    @Deprecated("")
-    fun AppExit(cxt: Context?) {
-        appExit(cxt)
+        activityStack?.clear()
     }
 
     /**

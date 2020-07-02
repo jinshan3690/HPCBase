@@ -72,6 +72,11 @@ abstract class BaseActivity : ComponentActivity() {
 
     abstract fun queryData()
 
+    override fun onDestroy() {
+        super.onDestroy()
+        AcStack.create().removeActivity(this)
+    }
+
     /**
      * 屏幕适配
      */
