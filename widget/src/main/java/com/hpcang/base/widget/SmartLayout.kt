@@ -30,26 +30,26 @@ class SmartLayout @JvmOverloads constructor(
     private var cornerRadiusArray = FloatArray(8)
     private var layer = RectF()
 
-    private var stroke: Int = 0
-    private var strokeColor: Int = 0
-    private var color: Int = 0
-    private var endColor: Int = 0
-    private var orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.LEFT_RIGHT
-    private var rippleColor: Int = 0
-    private var shadowColor: Int = 0
-    private var maskDrawable: Drawable? = null
-    private var disableColor: Int = 0
-    private var selectedStrokeColor: Int = 0
-    private var selectedColor: Int = 0
-    private var selectedEndColor: Int = 0
-    private var shape: Int = GradientDrawable.RECTANGLE
-    private var defaultStateListAnim: Boolean = false
-    private var stateListAnim: StateListAnimator? = null
-    private var defaultDuration: Long = 200
-    private var elevationNormal: Float = 0f
-    private var elevationPressed: Float = 0f
-    private var translationZNormal: Float = 0f
-    private var translationZPressed: Float = 0f
+    var stroke: Int = 0
+    var strokeColor: Int = 0
+    var color: Int = 0
+    var endColor: Int = 0
+    var orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.LEFT_RIGHT
+    var rippleColor: Int = 0
+    var shadowColor: Int = 0
+    var maskDrawable: Drawable? = null
+    var disableColor: Int = 0
+    var selectedStrokeColor: Int = 0
+    var selectedColor: Int = 0
+    var selectedEndColor: Int = 0
+    var shape: Int = GradientDrawable.RECTANGLE
+    var defaultStateListAnim: Boolean = false
+    var stateListAnim: StateListAnimator? = null
+    var defaultDuration: Long = 200
+    var elevationNormal: Float = 0f
+    var elevationPressed: Float = 0f
+    var translationZNormal: Float = 0f
+    var translationZPressed: Float = 0f
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SmartLayout)
@@ -348,6 +348,24 @@ class SmartLayout @JvmOverloads constructor(
         val a = min(255, max(0, (alpha * 255).toInt())) shl 24
         val rgb = 0x00ffffff and baseColor
         return a + rgb
+    }
+
+    fun setRadius(radius :Float = 0f,
+               radiusLeftTop :Float = radius,radiusRightTop :Float = radius,
+               radiusRightBottom :Float = radius,radiusLeftBottom :Float = radius){
+        cornerRadiusArray.run {
+            set(0, radiusLeftTop)
+            set(1, radiusLeftTop)
+
+            set(2, radiusRightTop)
+            set(3, radiusRightTop)
+
+            set(4, radiusRightBottom)
+            set(5, radiusRightBottom)
+
+            set(6, radiusLeftBottom)
+            set(7, radiusLeftBottom)
+        }
     }
 
 }
