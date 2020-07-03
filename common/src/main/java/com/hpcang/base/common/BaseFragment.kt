@@ -12,12 +12,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.Postcard
 import com.hpcang.base.common.util.AcManager
+import com.hpcang.base.common.util.AcStack
 
 abstract class BaseFragment : Fragment() {
 
     lateinit var context: BaseActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onCreateBefore(savedInstanceState)
         super.onCreate(savedInstanceState)
         context = activity as BaseActivity
     }
@@ -25,7 +27,7 @@ abstract class BaseFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        return initView(container, savedInstanceState)
+        return initBinding(container)
     }
 
     inline fun <reified T : ViewDataBinding> binding(
@@ -36,14 +38,17 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initData()
-
+        initView()
+        queryData()
     }
 
-    abstract fun initView(container: ViewGroup?, savedInstanceState: Bundle?):View?
+    open fun onCreateBefore(savedInstanceState: Bundle?) {}
 
-    abstract fun initData()
+    abstract fun initBinding(container: ViewGroup?):View?
+
+    abstract fun initView()
+
+    abstract fun queryData()
 
     open fun showLoading() {
         context.showLoading()
@@ -83,8 +88,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun getCompat(v: View, target: String): Bundle? {
-        val options =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(context, v, target)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, v, target)
         return options.toBundle()
     }
 

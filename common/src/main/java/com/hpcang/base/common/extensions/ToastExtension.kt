@@ -47,7 +47,7 @@ inline fun getToastView(root: () -> View?, message: () -> String?): View {
         textView.setTextColor(Color.WHITE)
         textView.text = message()
         textView.textSize = 14f
-        textView.setPadding(10f.dp2px(), 5f.dp2px(), 10f.dp2px(), 5f.dp2px())
+        textView.setPadding(10f.dp2px(), 8f.dp2px(), 10f.dp2px(), 8f.dp2px())
         (view as ViewGroup).addView(textView)
     }
     return view

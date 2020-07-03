@@ -4,6 +4,7 @@ import com.hpcang.base.common.BaseActivity
 import com.hpcang.base.common.extensions.showToast
 import com.hpcang.base.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
