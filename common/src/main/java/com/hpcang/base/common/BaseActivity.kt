@@ -28,6 +28,7 @@ abstract class BaseActivity : ComponentActivity() {
         context = this
         onCreateBefore(savedInstanceState)
         super.onCreate(savedInstanceState)
+        initViewBefore()
         AcStack.create().addActivity(this)
         initBinding()
         initLoading()
@@ -39,6 +40,8 @@ abstract class BaseActivity : ComponentActivity() {
         acManager.isStatusTrans = true
         acManager.setStatusDark()
     }
+
+    open fun initViewBefore() {}
 
     protected inline fun <reified T : ViewDataBinding> binding(
         @LayoutRes resId: Int

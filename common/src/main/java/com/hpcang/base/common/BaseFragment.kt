@@ -27,14 +27,13 @@ abstract class BaseFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        initViewBefore()
         return initBinding(container)
     }
 
     inline fun <reified T : ViewDataBinding> binding(
         @LayoutRes resId: Int, container:ViewGroup?
-    ): Lazy<T> = lazy {
-        DataBindingUtil.inflate<T>(layoutInflater, resId, container,false)
-    }
+    ): T = DataBindingUtil.inflate<T>(layoutInflater, resId, container,false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +42,8 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun onCreateBefore(savedInstanceState: Bundle?) {}
+
+    open fun initViewBefore() {}
 
     abstract fun initBinding(container: ViewGroup?):View?
 
