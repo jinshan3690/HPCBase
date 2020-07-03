@@ -16,7 +16,7 @@ import com.hpcang.base.common.util.AcStack
 
 abstract class BaseFragment : Fragment() {
 
-    open val mContext: BaseActivity by lazy {  activity as BaseActivity }
+    val baseActivity: BaseActivity by lazy {  activity as BaseActivity }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         onCreateBefore(savedInstanceState)
@@ -51,32 +51,32 @@ abstract class BaseFragment : Fragment() {
     abstract fun queryData()
 
     open fun showLoading() {
-        mContext.showLoading()
+        baseActivity.showLoading()
     }
 
     open fun hideLoading() {
-        mContext.hideLoading()
+        baseActivity.hideLoading()
     }
 
     /**
      * 跳转方法
      */
     fun toActivity(url: String) {
-        AcManager.toActivity(mContext, url)
+        AcManager.toActivity(baseActivity, url)
     }
 
     fun toActivity(url: String, compat: ActivityOptionsCompat) {
-        AcManager.toActivity(mContext, url, compat)
+        AcManager.toActivity(baseActivity, url, compat)
     }
 
     fun toActivityForResult(url: String, request: Int) {
-        AcManager.toActivityForResult(mContext, url, request)
+        AcManager.toActivityForResult(baseActivity, url, request)
     }
 
     fun toActivityForResult(
         url: String, compat: ActivityOptionsCompat, request: Int
     ) {
-        AcManager.toActivityForResult(mContext, url, compat, request)
+        AcManager.toActivityForResult(baseActivity, url, compat, request)
     }
 
     fun toActivityForData(url: String): Postcard {
@@ -88,7 +88,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun getCompat(v: View, target: String): Bundle? {
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(mContext, v, target)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(baseActivity, v, target)
         return options.toBundle()
     }
 
