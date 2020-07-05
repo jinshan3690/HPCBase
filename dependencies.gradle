@@ -1,7 +1,7 @@
 ext {
     isModule = true
     android = [
-            applicationId    : "com.hpcang.base",
+            applicationId    : "com.hpcang",
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.3",
             minSdkVersion    : 21,

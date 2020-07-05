@@ -1,12 +1,13 @@
-package com.hpcang.base
+package com.hpcang
 
 import android.view.View
 import android.view.ViewGroup
-import com.hpcang.base.databinding.FragmentMainBinding
+import com.hpcang.base.BaseFragment
+import com.hpcang.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment :BaseFragment() {
+class MainFragment : BaseFragment() {
 
     override fun initBinding(container: ViewGroup?): View? {
         return binding<FragmentMainBinding>(R.layout.fragment_main, container).root

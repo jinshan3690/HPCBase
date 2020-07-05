@@ -1,5 +1,6 @@
-package com.hpcang.base
+package com.hpcang
 
+import com.hpcang.base.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

@@ -1,8 +1,9 @@
-package com.hpcang.base
+package com.hpcang
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.hpcang.base.databinding.ActivityMainBinding
+import com.hpcang.base.BaseActivity
+import com.hpcang.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

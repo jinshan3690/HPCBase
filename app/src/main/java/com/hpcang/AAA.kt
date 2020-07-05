@@ -1,4 +1,4 @@
-package com.hpcang.base
+package com.hpcang
 
 import androidx.lifecycle.ViewModel
 
