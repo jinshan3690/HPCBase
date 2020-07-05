@@ -12,9 +12,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import com.hpcang.base.common.extensions.dp2px
-import com.hpcang.base.common.extensions.px2sp
-import com.hpcang.base.common.extensions.sp2px
+import com.hpcang.base.extensions.dp2px
+import com.hpcang.base.extensions.px2sp
+import com.hpcang.base.extensions.sp2px
 import java.util.*
 
 class WheelView @JvmOverloads constructor(

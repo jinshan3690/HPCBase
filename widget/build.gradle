@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: "${rootProject.rootDir}/config.gradle"
+apply from: "${rootProject.rootDir}/publish.gradle"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -14,5 +15,20 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["androidJunit"]
     androidTestImplementation rootProject.ext.dependencies["espresso"]
 
-    api project(':common')
+//    api project(':base')
+    api "com.hpcang.base:base:$project.ext.MAVEN_VERSION"
+}
+
+//maven配置
+publishing {
+    publications {
+        uploadSDK(MavenPublication) {
+            artifact "build/outputs/aar/widget-release.aar"
+            artifactId "widget"
+        }
+    }
+
+}
+repositories {
+    mavenCentral()
 }

@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+apply from: "${rootProject.rootDir}/config.gradle"
+apply from: "${rootProject.rootDir}/publish.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    project.ext.setDefaultConfig project
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["androidJunit"]
+    androidTestImplementation rootProject.ext.dependencies["espresso"]
+
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["constraintlayout"]
+
+    api rootProject.ext.dependencies["kotlin-stdlib"]
+    api rootProject.ext.dependencies["core-ktx"]
+//    api rootProject.ext.dependencies["hilt-android"]
+//    api rootProject.ext.dependencies["hilt-lifecycle-viewmodel"]
+//    api rootProject.ext.dependencies["hilt-work"]
+    api rootProject.ext.dependencies["room-runtime"]
+    api rootProject.ext.dependencies["room-ktx"]
+    api rootProject.ext.dependencies["fragment-ktx"]
+    api rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
+    api rootProject.ext.dependencies["lifecycle-viewmodel-savedstate"]
+    api rootProject.ext.dependencies["lifecycle-livedata-ktx"]
+    api rootProject.ext.dependencies["work-runtime-ktx"]
+    api rootProject.ext.dependencies["navigation-runtime-ktx"]
+    api rootProject.ext.dependencies["navigation-fragment-ktx"]
+    api rootProject.ext.dependencies["navigation-ui-ktx"]
+    api rootProject.ext.dependencies["viewpager2"]
+    api rootProject.ext.dependencies["startup-runtime"]
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["logging-interceptor"]
+    api rootProject.ext.dependencies["arouter"]
+
+    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide-okhttp3-integration"]
+    api rootProject.ext.dependencies["glide-annotations"]
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["retrofit-url-manager"]
+    api rootProject.ext.dependencies["permissionsdispatcher"]
+    implementation rootProject.ext.dependencies["systembartint"]
+    api rootProject.ext.dependencies["multidex"]
+
+}
+
+//maven配置
+publishing {
+    publications {
+        uploadSDK(MavenPublication) {
+            artifact "build/outputs/aar/base-release.aar"
+            artifactId "base"
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}

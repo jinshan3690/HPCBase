@@ -1,16 +1,19 @@
 package com.hpcang.base
 
-import com.hpcang.base.common.BaseActivity
-import com.hpcang.base.common.extensions.showToast
+import android.os.Bundle
+import androidx.activity.viewModels
 import com.hpcang.base.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by binding(R.layout.activity_main)
+    private val viewModel by viewModels<AAA>()
 
+    override fun onCreateBefore(savedInstanceState: Bundle?) {
+        super.onCreateBefore(savedInstanceState)
+    }
 
     override fun initLoading() {
 

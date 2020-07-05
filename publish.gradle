@@ -1,0 +1,75 @@
+apply plugin: 'maven-publish'
+
+ext{
+    RELEASE_URL = 'http://172.19.202.70:8081/repository/maven-releases/'
+    SNAPSHOT_URL = 'http://172.19.202.70:8081/repository/maven-snapshots/'
+
+    //    MAVEN_VERSION = '1.0.0'
+    MAVEN_VERSION = '1.0.0-SNAPSHOT'
+}
+
+//上传groupId名称
+def MAVEN_GROUP_ID = 'com.hpcang.base'
+//maven私服用户名
+def MAVEN_USERNAME = 'js'
+//maven私服密码
+def MAVEN_PASSWORD = '123456'
+
+// 判断版本是Release or Snapshots
+def isReleaseBuild() {
+    return !MAVEN_VERSION.contains("SNAPSHOT")
+}
+
+// 获取仓库url
+def getRepositoryUrl() {
+    return isReleaseBuild() ? RELEASE_URL : SNAPSHOT_URL
+}
+
+publishing {
+    publications {
+        uploadSDK(MavenPublication) {
+            groupId MAVEN_GROUP_ID
+            version MAVEN_VERSION
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                configurations.implementation.allDependencies.withType(ModuleDependency) { ModuleDependency dp ->
+                    if (dp.version != "unspecified") {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', dp.group)
+                        dependencyNode.appendNode('artifactId', dp.name)
+                        dependencyNode.appendNode('version', dp.version)
+
+                        if (dp.excludeRules.size() > 0) {
+                            def exclusions = dependencyNode.appendNode('exclusions')
+                            dp.excludeRules.each { ExcludeRule ex ->
+                                def exclusion = exclusions.appendNode('exclusion')
+                                exclusion.appendNode('groupId', ex.group)
+                                exclusion.appendNode('artifactId', ex.module)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url getRepositoryUrl()
+            credentials {
+                username MAVEN_USERNAME
+                password MAVEN_PASSWORD
+            }
+        }
+    }
+
+}
+
+
+task publishToMaven(dependsOn: ['assemble', 'publish']) {
+    doLast {
+        println "finish publish to maven"
+    }
+}
+
+publishToMaven.setGroup('upload')

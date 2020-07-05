@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: "${rootProject.rootDir}/config.gradle"
+apply from: "${rootProject.rootDir}/publish.gradle"
 
 android {
     signingConfigs {
@@ -56,7 +57,7 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["espresso"]
     debugImplementation rootProject.ext.dependencies["debug-leakcanary"]
 
-    implementation project(':widget')
+    implementation "com.hpcang.base:widget:$project.ext.MAVEN_VERSION"
 
     api rootProject.ext.dependencies["hilt-android"]
     api rootProject.ext.dependencies["hilt-lifecycle-viewmodel"]
@@ -73,4 +74,17 @@ dependencies {
 //        implementation project(':login')
     }
 
+}
+
+//maven配置
+publishing {
+    publications {
+        uploadSDK(MavenPublication) {
+            artifactId "base"
+            groupId "com.hpcang"
+        }
+    }
+}
+repositories {
+    mavenCentral()
 }

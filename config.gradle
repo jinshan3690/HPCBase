@@ -2,6 +2,7 @@
 project.ext {
     //统一设置APP配置
     setDefaultConfig = { extension ->
+
         //相对于APP中的build.gradle android {}的内容
         extension.android {
             compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -54,5 +55,6 @@ project.ext {
         }
 
     }
+
 
 }
