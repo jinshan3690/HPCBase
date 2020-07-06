@@ -21,13 +21,29 @@ buildscript {
     }
 }
 
+//加载资源
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+properties.load( inputStream )
+
+//读取字段
+def MAVEN_USERNAME = properties.getProperty( 'username' )
+def MAVEN_PASSWORD = properties.getProperty( 'password' )
+
 allprojects {
     repositories {
         google()
         jcenter()
         maven{
-            url 'http://172.19.202.70:8081/repository/maven-public/'
+            url 'https://ops-nexus.hpcang.com/repository/maven-public/'
+            credentials {
+                username MAVEN_USERNAME
+                password MAVEN_PASSWORD
+            }
         }
+    }
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 }
 
