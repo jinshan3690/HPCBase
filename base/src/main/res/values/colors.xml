@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#415382</color>
+    <color name="colorPrimaryDark">#415382</color>
     <color name="statusBarColor">@color/colorPrimary</color>
 
 </resources>

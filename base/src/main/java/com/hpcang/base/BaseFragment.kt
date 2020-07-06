@@ -9,6 +9,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.Postcard
 import com.hpcang.base.util.AcManager
 
@@ -47,6 +48,22 @@ abstract class BaseFragment : Fragment() {
     abstract fun initView()
 
     abstract fun queryData()
+
+    protected open fun registerBinding(binding : ViewDataBinding,viewModel : BaseViewModel): View? {
+        viewModel.finishLiveData.observe(this, Observer { baseActivity.finish() })
+        viewModel.showLoadingLiveData.observe(this, Observer{ showLoading() })
+        viewModel.hideLoadingLiveData.observe(this, Observer{ hideLoading() })
+        viewModel.httpErrorLiveData.observe(this, Observer { params ->
+            httpError(
+                params[BaseViewModel.ParameterField.MESSAGE] as String?,
+                params[BaseViewModel.ParameterField.TYPE] as Int,
+                params[BaseViewModel.ParameterField.DATA]
+            )
+        })
+        return binding.root
+    }
+
+    open fun httpError(message:String?, type:Int, data:Any?){}
 
     open fun showLoading() {
         baseActivity.showLoading()

@@ -12,6 +12,7 @@ import androidx.annotation.LayoutRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.Postcard
 import com.hpcang.base.util.AcManager
 import com.hpcang.base.util.AcStack
@@ -72,6 +73,21 @@ abstract class BaseActivity : ComponentActivity() {
     abstract fun initView()
 
     abstract fun queryData()
+
+    open fun httpError(message:String?, type:Int, data:Any?){}
+
+    open fun registerBinding(viewModel : BaseViewModel) {
+        viewModel.finishLiveData.observe(this, Observer { finish() })
+        viewModel.showLoadingLiveData.observe(this, Observer{ showLoading() })
+        viewModel.hideLoadingLiveData.observe(this, Observer{ hideLoading() })
+        viewModel.httpErrorLiveData.observe(this, Observer { params ->
+            httpError(
+                params[BaseViewModel.ParameterField.MESSAGE] as String?,
+                params[BaseViewModel.ParameterField.TYPE] as Int,
+                params[BaseViewModel.ParameterField.DATA]
+            )
+        })
+    }
 
     override fun onDestroy() {
         super.onDestroy()
