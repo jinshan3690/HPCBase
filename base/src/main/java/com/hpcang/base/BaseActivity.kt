@@ -9,6 +9,7 @@ import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -19,7 +20,7 @@ import com.hpcang.base.util.AcStack
 import me.jessyan.autosize.AutoSizeCompat
 
 @SuppressLint("RestrictedApi")
-abstract class BaseActivity : ComponentActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var context: BaseActivity
     var view: View? = null

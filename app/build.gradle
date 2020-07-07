@@ -57,7 +57,6 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["espresso"]
     debugImplementation rootProject.ext.dependencies["debug-leakcanary"]
 
-    implementation "com.hpcang.base:widget:$project.ext.MAVEN_VERSION"
 
     api rootProject.ext.dependencies["hilt-android"]
     api rootProject.ext.dependencies["hilt-lifecycle-viewmodel"]
@@ -72,6 +71,10 @@ dependencies {
 
     if (!rootProject.ext.isModule) {
 //        implementation project(':login')
+
+        implementation project(':widget')
+    }else{
+        implementation "com.hpcang.base:widget:$project.ext.MAVEN_VERSION"
     }
 
 }

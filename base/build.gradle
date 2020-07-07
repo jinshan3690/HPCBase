@@ -29,6 +29,7 @@ dependencies {
     api rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
     api rootProject.ext.dependencies["lifecycle-viewmodel-savedstate"]
     api rootProject.ext.dependencies["lifecycle-livedata-ktx"]
+    api rootProject.ext.dependencies["lifecycle-common"]
     api rootProject.ext.dependencies["work-runtime-ktx"]
     api rootProject.ext.dependencies["navigation-runtime-ktx"]
     api rootProject.ext.dependencies["navigation-fragment-ktx"]
@@ -50,6 +51,9 @@ dependencies {
     api rootProject.ext.dependencies["permissionsdispatcher"]
     implementation rootProject.ext.dependencies["systembartint"]
     api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["smartRefreshLayout-kernel"]
+    api rootProject.ext.dependencies["smartRefreshLayout-header-classics"]
+    api rootProject.ext.dependencies["smartRefreshLayout-footer-classics"]
 
 }
 

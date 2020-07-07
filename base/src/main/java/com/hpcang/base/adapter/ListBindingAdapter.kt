@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import com.hpcang.base.BaseActivity
 import com.hpcang.base.OnAntiShakeClickListener
 import java.lang.RuntimeException
 import java.util.*
@@ -12,8 +15,7 @@ import java.util.*
 /**
  * Created by Js on 2016/5/13.
  */
-abstract class BaseListViewAdapter<T> : BaseAdapter {
-
+abstract class ListBindingAdapter<T, B : ViewDataBinding> : BaseAdapter {
     protected var context: Context? = null
     var data: MutableList<T> = ArrayList()
     fun set(data: List<T>?) {
@@ -47,37 +49,52 @@ abstract class BaseListViewAdapter<T> : BaseAdapter {
     }
 
     override fun getView(
-        position: Int, contentView: View?, parent: ViewGroup?
-    ): View? {
-        var contentView = contentView
-        if (contentView == null) {
-            contentView = if (layoutId != 0) inflate(layoutId) else View(context)
-        }
+        position: Int, contentView: View?, parent: ViewGroup
+    ): View {
         if (data.size == 0)
             throw RuntimeException("data.size不能为0")
-        getView(position, contentView!!, parent, data[position])
-        return contentView
+        return when {
+            layoutId == 0 -> {
+                getView(null, position, data[position])
+            }
+            contentView == null -> {
+                val binding = binding(layoutId, parent)
+                binding.root.tag = binding
+                val itemView = getView(
+                    binding, position, data[position]
+                )
+                binding.executePendingBindings()
+                return itemView
+            }
+            else -> {
+                val binding = contentView.tag as B
+                val itemView = getView(binding, position, data[position])
+                binding.executePendingBindings()
+                return itemView
+            }
+        }
     }
 
-    protected abstract fun getView(
-        position: Int, contentView: View, parent: ViewGroup?, item: T
-    )
+    abstract fun getView(binding: B?, position: Int, item: T):View
 
     fun clearData() {
         data.clear()
     }
 
-    fun inflate(layout: Int): View {
-        return LayoutInflater.from(context).inflate(layout, null)
-    }
+    open fun binding(layoutId: Int, parent: ViewGroup, attachToParent: Boolean = false): B {
+        val binding = DataBindingUtil.inflate<B>(
+            LayoutInflater.from(context), layoutId, parent, attachToParent
+        )
 
-    fun inflate(layout: Int, view: ViewGroup): View {
-        return LayoutInflater.from(context).inflate(layout, view, false)
+        binding.apply {
+            lifecycleOwner = context as BaseActivity
+        }
+        return binding
     }
 
     interface OnItemClickListener {
-        fun itemClick(v: View, position: Int)
-        fun itemLongClick(v: View, position: Int)
+        fun itemClick(v: View?, position: Int)
+        fun itemLongClick(v: View?, position: Int)
     }
 
     fun setOnClickListener(view: View, position: Int) {

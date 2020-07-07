@@ -15,8 +15,11 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["androidJunit"]
     androidTestImplementation rootProject.ext.dependencies["espresso"]
 
-//    api project(':base')
-    api "com.hpcang.base:base:$project.ext.MAVEN_VERSION"
+    if (!rootProject.ext.isModule) {
+        api project(':base')
+    }else{
+        api "com.hpcang.base:base:$project.ext.MAVEN_VERSION"
+    }
 }
 
 //maven配置

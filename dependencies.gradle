@@ -47,6 +47,7 @@ ext {
             "lifecycle-viewmodel-savedstate": "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0",
             //liveData
             "lifecycle-livedata-ktx"        : "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0",
+            "lifecycle-common"        : "androidx.lifecycle:lifecycle-common-java8:2.2.0",
             //work
             "work-runtime-ktx"              : "androidx.work:work-runtime-ktx:2.3.4",
             //viewPager2
@@ -81,5 +82,9 @@ ext {
             // 权限
             "permissionsdispatcher"         : 'com.github.hotchemi:permissionsdispatcher:3.3.2',
             "permissionsdispatcher-compiler": 'com.github.hotchemi:permissionsdispatcher-processor:3.3.2',
+            // 下拉刷新
+            "smartRefreshLayout-kernel"     : 'com.scwang.smart:refresh-layout-kernel:2.0.1',
+            "smartRefreshLayout-header-classics"   : 'com.scwang.smart:refresh-header-classics:2.0.1',
+            "smartRefreshLayout-footer-classics"   : 'com.scwang.smart:refresh-footer-classics:2.0.1',
     ]
 }

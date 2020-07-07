@@ -1,20 +1,24 @@
 package com.hpcang.base.adapter
 
-import android.animation.ObjectAnimator
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.hpcang.base.BaseActivity
 import com.hpcang.base.OnAntiShakeClickListener
-import java.lang.RuntimeException
-import java.util.*
+import com.hpcang.base.util.L
+import java.util.concurrent.Executor
 
-abstract class BaseRecyclerAdapter<Y : BaseViewHolder?, T : Any?> :
+abstract class RecyclerBindingAdapter<Y : BaseViewHolder?, T : Any?, B : ViewDataBinding> :
     ListAdapter<T, Y> {
 
     protected var context: Context
@@ -27,7 +31,6 @@ abstract class BaseRecyclerAdapter<Y : BaseViewHolder?, T : Any?> :
             override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
                 return false
             }
-
             override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
                 return false
             }
@@ -40,29 +43,39 @@ abstract class BaseRecyclerAdapter<Y : BaseViewHolder?, T : Any?> :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Y {
-        var view = View(context)
-        if (layoutId != 0) view = LayoutInflater.from(context).inflate(layoutId, parent, false)
-        return onCreateViewHolder(parent, view, viewType)
+        return onCreateViewHolder(
+            parent, if (layoutId != 0) binding(layoutId, parent) else null, viewType
+        )
     }
 
-    protected open fun onCreateViewHolder(parent: ViewGroup, view: View, viewType: Int): Y {
-        return BaseViewHolder(view) as Y
+    open fun onCreateViewHolder(
+        parent: ViewGroup, binding: B?, viewType: Int
+    ): Y {
+        if (binding == null)
+            throw RuntimeException("请重写onCreateViewHolder或传入layoutId")
+        return BaseViewHolder(binding) as Y
     }
 
     override fun onBindViewHolder(holder: Y, position: Int) {
         if (currentList.size == 0)
             throw RuntimeException("data.size不能为0")
-        onBindViewHolder(holder, position, currentList[position])
+        onBindViewHolder(
+            holder, position, getItem(position)
+        )
+        holder?.binding?.executePendingBindings()
     }
 
-    abstract fun onBindViewHolder(holder: Y, position: Int, item: T)
+    abstract fun onBindViewHolder(binding: Y, position: Int, item: T)
 
-    fun inflate(layout: Int): View {
-        return LayoutInflater.from(context).inflate(layout, null)
-    }
+    open fun binding(layoutId: Int, parent: ViewGroup, attachToParent: Boolean = false): B {
+        val binding = DataBindingUtil.inflate<B>(
+            LayoutInflater.from(context), layoutId, parent, attachToParent
+        )
 
-    fun inflate(layout: Int, view: ViewGroup?): View {
-        return LayoutInflater.from(context).inflate(layout, view, false)
+        binding.apply {
+            lifecycleOwner = context as BaseActivity
+        }
+        return binding
     }
 
     fun getItemData(position: Int): T {
